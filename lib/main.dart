@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hiveee/bloc/auth/auth_bloc.dart';
+import 'package:hiveee/bloc/user/user_bloc.dart';
 import 'package:hiveee/models/user.dart';
 import 'package:hiveee/repositories/user_repository.dart';
 import 'package:hiveee/routes/route_generator.dart';
@@ -23,13 +24,20 @@ void main() async{
   // runApp(const MyApp());
 
   runApp(
-    RepositoryProvider(
-      create: (_) => UserRepository(),
-      child: BlocProvider(
-        create: (context) => AuthBloc(userRepository: context.read<UserRepository>()),
-        child: const MyApp(),
-      ),
-    )
+    MultiBlocProvider(
+      providers: [
+        RepositoryProvider(
+          create: (_) => UserRepository(),
+        ),
+        BlocProvider(
+          create: (context) => AuthBloc(userRepository: context.read<UserRepository>()),
+        ),
+        BlocProvider(
+          create: (context) => UserBloc(userRepository: context.read<UserRepository>()),
+        ),
+      ],
+      child: const MyApp(),
+    ),
   );
 }
 

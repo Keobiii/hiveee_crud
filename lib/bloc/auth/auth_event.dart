@@ -27,3 +27,4 @@ class LoginUser extends AuthEvent {
   @override
   List<Object?> get props => [firstName, password];
 }
+
