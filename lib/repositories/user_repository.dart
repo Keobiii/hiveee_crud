@@ -1,6 +1,9 @@
 import 'package:hive/hive.dart';
 import 'package:hiveee/models/user.dart';
 
+
+// this is helper class that helps to talk with the Hive
+
 class UserRepository {
   static const String boxName = 'users';
 

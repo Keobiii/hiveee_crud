@@ -1,6 +1,9 @@
 import 'package:equatable/equatable.dart';
 import 'package:hiveee/models/user.dart';
 
+// AuthEvent - this is the list of events that represents the things the user/app can do
+// like, register, login, and logout
+
 abstract class AuthEvent extends Equatable {
   @override
   List<Object?> get props => [];

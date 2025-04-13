@@ -20,15 +20,21 @@ class UserListScreen extends StatelessWidget {
               itemCount: users.length,
               itemBuilder: (context, index) {
                 final user = users[index];
-                return Card(
-                  margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                  child: ListTile(
-                    leading: CircleAvatar(
-                      child: Text(user.firstName[0]),
+                return GestureDetector(
+                  onTap: () {
+                    print("User Name: ${user.firstName} ${user.lastName}");
+                    print("User ID: ${user.id}");
+                  },
+                  child: Card(
+                    margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                    child: ListTile(
+                      leading: CircleAvatar(
+                        child: Text(user.firstName[0]),
+                      ),
+                      title: Text("${user.firstName} ${user.lastName}"),
+                      subtitle: Text(user.email),
+                      trailing: Text("ID: ${user.id}"),
                     ),
-                    title: Text("${user.firstName} ${user.lastName}"),
-                    subtitle: Text(user.email),
-                    trailing: Text("ID: ${user.id}"),
                   ),
                 );
               },
