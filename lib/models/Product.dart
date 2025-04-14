@@ -1,4 +1,4 @@
-import 'package:hiveee/models/ProductCategory.dart';
+import 'package:hiveee/models/product_category.dart';
 
 class Product {
   int id;

@@ -4,6 +4,7 @@ import 'package:hiveee/bloc/auth/auth_bloc.dart';
 import 'package:hiveee/bloc/user/user_bloc.dart';
 import 'package:hiveee/repositories/user_repository.dart';
 import 'package:hiveee/screens/login_screen.dart';
+import 'package:hiveee/screens/seller_screen.dart';
 import 'package:hiveee/screens/signup_screen.dart';
 import 'package:hiveee/screens/update_user_data.dart';
 import 'package:hiveee/screens/user_list_screen.dart';
@@ -79,6 +80,8 @@ class RouteGenerator {
                 child: const UserScreen(),
               ),
         );
+      case '/sellerPage':
+        return MaterialPageRoute(builder: (context) => SellerScreen());
       default:
         return _errorRoute();
     }

@@ -37,6 +37,11 @@ class _LoginScreenState extends State<LoginScreen> {
                 context,
               ).pushNamedAndRemoveUntil('/userPage', (route) => false);
               break;
+            case 3:
+              Navigator.of(
+                context,
+              ).pushNamedAndRemoveUntil('/sellerPage', (route) => false);
+              break;
             default:
               Navigator.of(
                 context,
