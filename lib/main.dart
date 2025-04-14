@@ -8,9 +8,9 @@ import 'package:hiveee/routes/route_generator.dart';
 import 'package:hiveee/utils/Palette.dart';
 import 'package:hive_flutter/adapters.dart';
 
-void main() async{
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  
+
   // Initialize Hive
   await Hive.initFlutter();
 
@@ -20,20 +20,21 @@ void main() async{
   // Open the box
   await Hive.openBox<User>('users');
 
-
   // runApp(const MyApp());
 
   runApp(
     MultiBlocProvider(
       providers: [
-        RepositoryProvider(
-          create: (_) => UserRepository(),
+        RepositoryProvider(create: (_) => UserRepository()),
+        BlocProvider(
+          create:
+              (context) =>
+                  AuthBloc(userRepository: context.read<UserRepository>()),
         ),
         BlocProvider(
-          create: (context) => AuthBloc(userRepository: context.read<UserRepository>()),
-        ),
-        BlocProvider(
-          create: (context) => UserBloc(userRepository: context.read<UserRepository>()),
+          create:
+              (context) =>
+                  UserBloc(userRepository: context.read<UserRepository>()),
         ),
       ],
       child: const MyApp(),

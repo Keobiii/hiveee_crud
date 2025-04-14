@@ -1,22 +1,84 @@
 import 'package:flutter/material.dart';
-import 'package:hiveee/screens/LoginScreen.dart';
-import 'package:hiveee/screens/SignUpScreen.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hiveee/bloc/auth/auth_bloc.dart';
+import 'package:hiveee/bloc/user/user_bloc.dart';
+import 'package:hiveee/repositories/user_repository.dart';
+import 'package:hiveee/screens/login_screen.dart';
+import 'package:hiveee/screens/signup_screen.dart';
 import 'package:hiveee/screens/update_user_data.dart';
 import 'package:hiveee/screens/user_list_screen.dart';
+import 'package:hiveee/screens/user_screen.dart';
 
 class RouteGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
       case '/':
-        return MaterialPageRoute(builder: (_) => const LoginScreen());
+        return MaterialPageRoute(
+          builder:
+              (_) => BlocProvider(
+                create:
+                    (context) => AuthBloc(
+                      userRepository: context.read<UserRepository>(),
+                    ),
+                child: const LoginScreen(),
+              ),
+        );
       case '/signup':
-        return MaterialPageRoute(builder: (_) => const SignUpScreen());
-      case '/home':
-        return MaterialPageRoute(builder: (_) => const UserListScreen());
+        return MaterialPageRoute(
+          builder:
+              (_) => BlocProvider(
+                create:
+                    (context) => AuthBloc(
+                      userRepository: context.read<UserRepository>(),
+                    ),
+                child: const SignUpScreen(),
+              ),
+        );
+      case '/list':
+        return MaterialPageRoute(
+          builder:
+              (_) => BlocProvider(
+                create:
+                    (context) => UserBloc(
+                      userRepository: context.read<UserRepository>(),
+                    ),
+                child: const UserListScreen(),
+              ),
+        );
       case '/updateUser':
         // Expecting the Page that passing userId
         final userId = settings.arguments as int;
-        return MaterialPageRoute(builder: (_) => UpdateUserData(userId: userId));
+        return MaterialPageRoute(
+          builder:
+              (_) => BlocProvider(
+                create:
+                    (context) => UserBloc(
+                      userRepository: context.read<UserRepository>(),
+                    ),
+                child: UpdateUserData(userId: userId),
+              ),
+        );
+      case '/userPage':
+        return MaterialPageRoute(
+          builder:
+              (_) => MultiBlocProvider(
+                providers: [
+                  BlocProvider(
+                    create:
+                        (context) => UserBloc(
+                          userRepository: context.read<UserRepository>(),
+                        ),
+                  ),
+                  BlocProvider(
+                    create:
+                        (context) => AuthBloc(
+                          userRepository: context.read<UserRepository>(),
+                        ),
+                  ),
+                ],
+                child: const UserScreen(),
+              ),
+        );
       default:
         return _errorRoute();
     }

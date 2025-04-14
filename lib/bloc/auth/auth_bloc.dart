@@ -19,12 +19,11 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     on<LoginUser>(_onLoginUser);
   }
 
-
   // Future - represents a value that will be available later, like a promise.
   // In this case, "_onRegisterUser" is an async function that promises to complete later.
   // It doesn't return any data (void), but it performs an action: registering a user.
 
-  // void - means this function doesn't return any value. 
+  // void - means this function doesn't return any value.
   // If we changed "void" to String, int, or User, that would mean it returns that data type.
 
   // async - makes this function asynchronous.
@@ -33,7 +32,10 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   // Emitter - comes from BLoC. It's used to emit new states (like loading, success, failure).
   // When we emit a state, the UI listens and updates based on that state.
 
-  Future<void> _onRegisterUser(RegisterUser event, Emitter<AuthState> emit) async {
+  Future<void> _onRegisterUser(
+    RegisterUser event,
+    Emitter<AuthState> emit,
+  ) async {
     // Tell the UI we're doing something (like showing a loading spinner)
     emit(AuthLoading());
 
@@ -49,16 +51,21 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     }
   }
 
-
   Future<void> _onLoginUser(LoginUser event, Emitter<AuthState> emit) async {
     emit(AuthLoading());
 
-    final user = await userRepository.getUserByNameAndPassword(event.firstName, event.password);
+    final user = await userRepository.getUserByNameAndPassword(
+      event.email,
+      event.password,
+    );
 
     if (user != null) {
       emit(AuthSuccess(user));
+      print('User Role: ${user.userRole}');
     } else {
       emit(AuthFailure("Invalid credentials."));
+
+      print('Failed: ');
     }
   }
 }

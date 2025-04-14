@@ -2,10 +2,8 @@ import 'package:equatable/equatable.dart';
 import 'package:hiveee/models/user.dart';
 
 abstract class UserEvent extends Equatable {
-
-    @override
+  @override
   List<Object?> get props => [];
-  
 }
 
 class UpdateUser extends UserEvent {
@@ -15,4 +13,13 @@ class UpdateUser extends UserEvent {
 
   @override
   List<Object?> get props => [updatedUser];
+}
+
+class DeleteUser extends UserEvent {
+  final int studentId;
+
+  DeleteUser(this.studentId);
+
+  @override
+  List<Object?> get props => [studentId];
 }

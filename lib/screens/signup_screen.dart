@@ -4,7 +4,7 @@ import 'package:hive/hive.dart';
 import 'package:hiveee/bloc/auth/auth_bloc.dart';
 import 'package:hiveee/bloc/auth/auth_event.dart';
 import 'package:hiveee/models/user.dart';
-import 'package:hiveee/screens/LoginScreen.dart';
+import 'package:hiveee/screens/login_screen.dart';
 import 'package:hiveee/widget/gradient_button.dart';
 import 'package:hiveee/widget/login_field.dart';
 
@@ -136,8 +136,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         createdAt: DateTime.now(),
                       );
 
-                      
                       context.read<AuthBloc>().add(RegisterUser(user));
+                      Navigator.of(context).pop();
                     }
                   },
                 ),

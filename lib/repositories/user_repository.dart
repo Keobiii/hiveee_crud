@@ -1,7 +1,6 @@
 import 'package:hive/hive.dart';
 import 'package:hiveee/models/user.dart';
 
-
 // this is helper class that helps to talk with the Hive
 
 class UserRepository {
@@ -32,11 +31,11 @@ class UserRepository {
     await box.put(user.id, user);
   }
 
-  Future<User?> getUserByNameAndPassword(String firstName, String password) async {
+  Future<User?> getUserByNameAndPassword(String email, String password) async {
     final box = await Hive.openBox<User>(boxName);
     try {
       return box.values.firstWhere(
-        (user) => user.firstName == firstName && user.password == password,
+        (user) => user.email == email && user.password == password,
       );
     } catch (_) {
       return null;
