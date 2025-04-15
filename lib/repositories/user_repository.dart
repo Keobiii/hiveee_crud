@@ -8,7 +8,7 @@ class UserRepository {
 
   Future<void> addUser(User user) async {
     final box = await Hive.openBox<User>(boxName);
-    await box.put(user.id, user);
+    await box.put(user.userId, user);
   }
 
   Future<User?> getUserById(int id) async {
@@ -28,7 +28,7 @@ class UserRepository {
 
   Future<void> updateUser(User user) async {
     final box = await Hive.openBox<User>(boxName);
-    await box.put(user.id, user);
+    await box.put(user.userId, user);
   }
 
   Future<User?> getUserByNameAndPassword(String email, String password) async {

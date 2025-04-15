@@ -8,7 +8,7 @@ class ProductRepository {
 
   Future<void> addProduct(Product product) async {
     final box = await Hive.openBox<Product>(boxName);
-    await box.put(product.id, product);
+    await box.put(product.productId, product);
   }
 
   Future<Product?> getProductById(int id) async {
@@ -28,6 +28,6 @@ class ProductRepository {
 
   Future<void> updateProduct(Product product) async {
     final box = await Hive.openBox<Product>(boxName);
-    await box.put(product.id, product);
+    await box.put(product.productId, product);
   }
 }

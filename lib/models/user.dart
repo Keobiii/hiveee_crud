@@ -11,7 +11,7 @@ part 'user.g.dart';
 @HiveType(typeId: 0)
 class User {
   @HiveField(0)
-  int id;
+  int userId;
 
   @HiveField(1)
   int userRole;
@@ -32,7 +32,7 @@ class User {
   DateTime createdAt;
 
   User({
-    required this.id,
+    required this.userId,
     required this.userRole,
     required this.email,
     required this.firstName,

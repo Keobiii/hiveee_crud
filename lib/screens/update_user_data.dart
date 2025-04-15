@@ -199,7 +199,7 @@ class _UpdateUserDataState extends State<UpdateUserData> {
                                         _editEmailController.text
                                             .trim()
                                             .toLowerCase() &&
-                                    u.id != currentUser!.id,
+                                    u.userId != currentUser!.userId,
                               );
 
                               if (emailExists) {
@@ -214,7 +214,7 @@ class _UpdateUserDataState extends State<UpdateUserData> {
                               }
 
                               final user = User(
-                                id: currentUser!.id,
+                                userId: currentUser!.userId,
                                 userRole:
                                     selectedRole != null
                                         ? int.parse(selectedRole!)
@@ -226,7 +226,7 @@ class _UpdateUserDataState extends State<UpdateUserData> {
                                 createdAt: DateTime.now(),
                               );
 
-                              box.put(currentUser!.id, user);
+                              box.put(currentUser!.userId, user);
 
                               ScaffoldMessenger.of(context).showSnackBar(
                                 const SnackBar(

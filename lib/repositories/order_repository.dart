@@ -8,7 +8,7 @@ class OrderRepository {
 
   Future<void> addOrder(Order order) async {
     final box = await Hive.openBox<Order>(boxName);
-    await box.put(order.id, order);
+    await box.put(order.orderId, order);
   }
 
   Future<Order?> getOrderById(int id) async {
@@ -28,6 +28,6 @@ class OrderRepository {
 
   Future<void> updateOrder(Order order) async {
     final box = await Hive.openBox<Order>(boxName);
-    await box.put(order.id, order);
+    await box.put(order.orderId, order);
   }
 }

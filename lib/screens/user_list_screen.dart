@@ -31,7 +31,7 @@ class UserListScreen extends StatelessWidget {
             itemBuilder: (context, index) {
               final user = users[index];
               return Dismissible(
-                key: Key(user.id.toString()),
+                key: Key(user.userId.toString()),
                 direction: DismissDirection.endToStart,
                 background: Container(
                   color: Colors.red,
@@ -40,8 +40,8 @@ class UserListScreen extends StatelessWidget {
                   child: Icon(Icons.delete, color: Colors.white),
                 ),
                 onDismissed: (direction) {
-                  print("${user.id} Selected");
-                  context.read<UserBloc>().add(DeleteUser(user.id));
+                  print("${user.userId} Selected");
+                  context.read<UserBloc>().add(DeleteUser(user.userId));
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
                       content: Text(
@@ -55,7 +55,7 @@ class UserListScreen extends StatelessWidget {
                     Navigator.pushNamed(
                       context,
                       '/updateUser',
-                      arguments: user.id,
+                      arguments: user.userId,
                     );
                   },
                   child: Card(
@@ -67,7 +67,7 @@ class UserListScreen extends StatelessWidget {
                       leading: CircleAvatar(child: Text(user.firstName[0])),
                       title: Text("${user.firstName} ${user.lastName}"),
                       subtitle: Text(user.email),
-                      trailing: Text("ID: ${user.id}"),
+                      trailing: Text("ID: ${user.userId}"),
                     ),
                   ),
                 ),

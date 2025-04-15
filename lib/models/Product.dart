@@ -6,7 +6,7 @@ part 'product.g.dart';
 @HiveType(typeId: 1)
 class Product {
   @HiveField(0)
-  int id;
+  int productId;
 
   @HiveField(1)
   String name;
@@ -27,7 +27,7 @@ class Product {
   int quantity;
 
   Product({
-    required this.id,
+    required this.productId,
     required this.name,
     required this.categoryId,
     required this.description,
