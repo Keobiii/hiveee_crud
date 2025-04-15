@@ -60,22 +60,22 @@ class _LoginFieldState extends State<LoginField> {
                     ),
                   )
                   : null,
-          contentPadding: const EdgeInsets.all(27),
+          contentPadding: const EdgeInsets.all(25),
           enabledBorder: OutlineInputBorder(
-            borderSide: const BorderSide(color: Pallete.borderColor, width: 3),
+            borderSide: const BorderSide(color: Pallete.borderColor, width: 1),
             borderRadius: BorderRadius.circular(10),
           ),
           focusedBorder: OutlineInputBorder(
-            borderSide: const BorderSide(color: Pallete.whiteColor, width: 3),
+            borderSide: const BorderSide(color: Pallete.whiteColor, width: 2),
             borderRadius: BorderRadius.circular(10),
           ),
           errorBorder: OutlineInputBorder(
-            borderSide: const BorderSide(color: Colors.red, width: 3),
+            borderSide: const BorderSide(color: Colors.red, width: 2),
             borderRadius: BorderRadius.circular(10),
           ),
-          errorStyle: TextStyle(color: Colors.redAccent, height: 3),
+          errorStyle: TextStyle(color: Colors.redAccent, height: 2),
           focusedErrorBorder: OutlineInputBorder(
-            borderSide: const BorderSide(color: Colors.redAccent, width: 3),
+            borderSide: const BorderSide(color: Colors.redAccent, width: 2),
             borderRadius: BorderRadius.circular(10),
           ),
           hintText: widget.hintText,

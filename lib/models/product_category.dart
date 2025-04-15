@@ -1,10 +1,10 @@
 enum ProductCategory {
+  UNKNOWN("Unknown", 0),
   AA("Apparel and Accessories", 1),
   ET("Electronics", 2),
   HL("Home and Living", 3),
   HB("Health and Beauty", 4),
-  FB("Food and Beverages", 5),
-  UNKNOWN("Food and Beverages", 6);
+  FB("Food and Beverages", 5);
 
   final String categoryName;
   final int categoryId;

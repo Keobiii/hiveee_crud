@@ -130,6 +130,7 @@ class _UpdateUserDataState extends State<UpdateUserData> {
                           items: dropdownItems,
                           style: TextStyle(color: Colors.white),
                         ),
+
                         const SizedBox(height: 15),
                         LoginField(
                           hintText: 'Email',

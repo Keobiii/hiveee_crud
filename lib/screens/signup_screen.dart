@@ -128,7 +128,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
                       final user = User(
                         id: box.isEmpty ? 1 : box.values.last.id + 1,
-                        userRole: 2,
+                        userRole: 1,
                         email: emailController.text.trim(),
                         firstName: firstNameController.text.trim(),
                         lastName: lastNameController.text.trim(),

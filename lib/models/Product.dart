@@ -1,12 +1,29 @@
+import 'package:hive/hive.dart';
 import 'package:hiveee/models/product_category.dart';
 
+part 'product.g.dart';
+
+@HiveType(typeId: 1)
 class Product {
+  @HiveField(0)
   int id;
+
+  @HiveField(1)
   String name;
+
+  @HiveField(2)
   int categoryId;
+
+  @HiveField(3)
   String image;
+
+  @HiveField(4)
   String description;
+
+  @HiveField(5)
   double price;
+
+  @HiveField(6)
   int quantity;
 
   Product({
