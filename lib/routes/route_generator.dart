@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hiveee/bloc/auth/auth_bloc.dart';
+import 'package:hiveee/bloc/product/product_bloc.dart';
 import 'package:hiveee/bloc/user/user_bloc.dart';
+import 'package:hiveee/repositories/product_repository.dart';
 import 'package:hiveee/repositories/user_repository.dart';
 import 'package:hiveee/screens/login_screen.dart';
+import 'package:hiveee/screens/seller/add_product.dart';
+import 'package:hiveee/screens/seller/update_product_data.dart';
+import 'package:hiveee/screens/seller/list_product.dart';
 import 'package:hiveee/screens/seller/seller_screen.dart';
 import 'package:hiveee/screens/signup_screen.dart';
 import 'package:hiveee/screens/update_user_data.dart';
@@ -81,7 +86,63 @@ class RouteGenerator {
               ),
         );
       case '/sellerPage':
-        return MaterialPageRoute(builder: (context) => SellerScreen());
+        return MaterialPageRoute(
+          builder:
+              (_) => MultiBlocProvider(
+                providers: [
+                  BlocProvider(
+                    create:
+                        (context) => ProductBloc(
+                          productRepository: context.read<ProductRepository>(),
+                        ),
+                  ),
+                ],
+                child: const SellerScreen(),
+              ),
+        );
+      case '/addProduct':
+        return MaterialPageRoute(
+          builder:
+              (_) => MultiBlocProvider(
+                providers: [
+                  BlocProvider(
+                    create:
+                        (context) => ProductBloc(
+                          productRepository: context.read<ProductRepository>(),
+                        ),
+                  ),
+                ],
+                child: const ProductForm(),
+              ),
+        );
+      case '/listProduct':
+        return MaterialPageRoute(
+          builder:
+              (_) => MultiBlocProvider(
+                providers: [
+                  BlocProvider(
+                    create:
+                        (context) => ProductBloc(
+                          productRepository: context.read<ProductRepository>(),
+                        ),
+                  ),
+                ],
+                child: const ListProduct(),
+              ),
+        );
+      case '/updateProduct':
+        // Expecting the Page that passing userId
+        final productId = settings.arguments as int;
+        return MaterialPageRoute(
+          builder:
+              (_) => BlocProvider(
+                create:
+                    (context) => ProductBloc(
+                      productRepository: context.read<ProductRepository>(),
+                    ),
+                child: UpdateProductData(productId: productId),
+              ),
+        );
       default:
         return _errorRoute();
     }

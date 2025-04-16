@@ -11,10 +11,10 @@ class Order {
   int orderId;
 
   @HiveField(1)
-  Product product;
+  int productId;
 
   @HiveField(2)
-  User user;
+  int userId;
 
   @HiveField(3)
   int status;
@@ -24,8 +24,8 @@ class Order {
 
   Order({
     required this.orderId,
-    required this.product,
-    required this.user,
+    required this.productId,
+    required this.userId,
     required this.status,
     required this.orderedAt,
   });
@@ -42,41 +42,21 @@ class Order {
 
 Store
 
-void saveOrder(Box<Order> orderBox, Box<User> userBox) {
-  // Create a User
-  var user = User(
-    userId: 1,
-    userRole: 0, 
-    email: "user@example.com",
-    firstName: "John",
-    lastName: "Doe",
-    password: "securepassword",
-    createdAt: DateTime.now(),
-  );
-
-  userBox.put(user.userId, user); // Store User in Hive
-
-  // Create an Order linked to the User object
-  var order = Order(
-    orderId: 1001,
-    productId: 500,
-    user: user, // Reference the User object directly
-    status: 1,
-    orderedAt: DateTime.now(),
-  );
-
-  orderBox.put(order.orderId, order); // Store Order in Hive
-}
+Order myOrder = Order(
+  orderId: 123,
+  productId: 456, // Example Product ID
+  userId: 789, // Example User ID
+  status: 1,
+  orderedAt: DateTime.now(),
+);
 
 
 Retrieve
-void fetchOrder(Box<Order> orderBox) {
-  var order = orderBox.get(1001);
+var productBox = Hive.box<Product>('productBox');
+Product myProduct = productBox.get(myOrder.productId)!;
 
-  if (order != null) {
-    print("Order was placed by: ${order.user.firstName} ${order.user.lastName}");
-  }
-}
+var userBox = Hive.box<User>('userBox');
+User myUser = userBox.get(myOrder.userId)!;
 
 
 */

@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hiveee/bloc/auth/auth_bloc.dart';
+import 'package:hiveee/bloc/product/product_bloc.dart';
 import 'package:hiveee/bloc/user/user_bloc.dart';
+import 'package:hiveee/models/product.dart';
 import 'package:hiveee/models/user.dart';
+import 'package:hiveee/repositories/product_repository.dart';
 import 'package:hiveee/repositories/user_repository.dart';
 import 'package:hiveee/routes/route_generator.dart';
 import 'package:hiveee/utils/Palette.dart';
@@ -16,9 +19,11 @@ void main() async {
 
   // Register Adapter
   Hive.registerAdapter(UserAdapter());
+  Hive.registerAdapter(ProductAdapter());
 
   // Open the box
   await Hive.openBox<User>('users');
+  await Hive.openBox<Product>('products');
 
   // runApp(const MyApp());
 
@@ -26,6 +31,7 @@ void main() async {
     MultiBlocProvider(
       providers: [
         RepositoryProvider(create: (_) => UserRepository()),
+        RepositoryProvider(create: (_) => ProductRepository()),
         BlocProvider(
           create:
               (context) =>
@@ -35,6 +41,12 @@ void main() async {
           create:
               (context) =>
                   UserBloc(userRepository: context.read<UserRepository>()),
+        ),
+        BlocProvider(
+          create:
+              (context) => ProductBloc(
+                productRepository: context.read<ProductRepository>(),
+              ),
         ),
       ],
       child: const MyApp(),
