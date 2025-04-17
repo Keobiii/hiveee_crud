@@ -1,35 +1,34 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:hiveee/widget/gradient_button.dart';
 
-class SellerScreen extends StatefulWidget {
-  const SellerScreen({super.key});
+class UserScreen extends StatefulWidget {
+  const UserScreen({super.key});
 
   @override
-  State<SellerScreen> createState() => _SellerScreenState();
+  State<UserScreen> createState() => _UserScreenState();
 }
 
-class _SellerScreenState extends State<SellerScreen> {
+class _UserScreenState extends State<UserScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: EdgeInsets.all(16.0),
         child: Center(
           child: Column(
             children: [
               GradientButton(
                 onPressed: () {
-                  Navigator.pushNamed(context, '/addProduct');
+                  Navigator.pushNamed(context, '/userOrderList');
                 },
-                text: 'Add Product',
+                text: 'Orders',
               ),
               SizedBox(height: 20),
               GradientButton(
                 onPressed: () {
-                  Navigator.pushNamed(context, '/listProduct');
+                  Navigator.pushNamed(context, '/orderPage');
                 },
-                text: 'Product List',
+                text: 'List of Product',
               ),
               SizedBox(height: 20),
               GradientButton(

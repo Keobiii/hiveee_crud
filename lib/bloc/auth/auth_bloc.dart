@@ -2,6 +2,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hiveee/bloc/auth/auth_event.dart';
 import 'package:hiveee/bloc/auth/auth_state.dart';
 import 'package:hiveee/repositories/user_repository.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 // BLoc - this is where the logic works
 // it listens fro events
@@ -60,6 +61,11 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     );
 
     if (user != null) {
+      // Save to SharedPreferences
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.setInt('userId', user.userId);
+      await prefs.setInt('userRole', user.userRole);
+
       emit(AuthSuccess(user));
       print('User Role: ${user.userRole}');
     } else {

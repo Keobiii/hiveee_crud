@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:hiveee/models/order.dart';
 import 'package:hiveee/models/product.dart';
 import 'package:hiveee/models/user.dart';
 
@@ -12,19 +13,18 @@ class OrderInitial extends OrderState {}
 class OrderLoading extends OrderState {}
 
 class OrderSuccess extends OrderState {
-  final Product product;
-  final User user;
+  final Order order;
 
-  OrderSuccess(this.product, this.user);
+  OrderSuccess(this.order);
 
   @override
-  List<Object?> get props => [product, user];
+  List<Object?> get props => [order];
 }
 
-class OrdeFailure extends OrderState {
+class OrderFailure extends OrderState {
   final String message;
 
-  OrdeFailure(this.message);
+  OrderFailure(this.message);
 
   @override
   List<Object?> get props => [message];

@@ -3,8 +3,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hiveee/bloc/auth/auth_bloc.dart';
 import 'package:hiveee/bloc/product/product_bloc.dart';
 import 'package:hiveee/bloc/user/user_bloc.dart';
+import 'package:hiveee/models/order.dart';
 import 'package:hiveee/models/product.dart';
 import 'package:hiveee/models/user.dart';
+import 'package:hiveee/repositories/order_repository.dart';
 import 'package:hiveee/repositories/product_repository.dart';
 import 'package:hiveee/repositories/user_repository.dart';
 import 'package:hiveee/routes/route_generator.dart';
@@ -20,10 +22,12 @@ void main() async {
   // Register Adapter
   Hive.registerAdapter(UserAdapter());
   Hive.registerAdapter(ProductAdapter());
+  Hive.registerAdapter(OrderAdapter());
 
   // Open the box
   await Hive.openBox<User>('users');
   await Hive.openBox<Product>('products');
+  await Hive.openBox<Order>('orders');
 
   // runApp(const MyApp());
 
@@ -32,6 +36,7 @@ void main() async {
       providers: [
         RepositoryProvider(create: (_) => UserRepository()),
         RepositoryProvider(create: (_) => ProductRepository()),
+        RepositoryProvider(create: (_) => OrderRepository()),
         BlocProvider(
           create:
               (context) =>

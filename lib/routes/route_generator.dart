@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hiveee/bloc/auth/auth_bloc.dart';
+import 'package:hiveee/bloc/order/order_bloc.dart';
 import 'package:hiveee/bloc/product/product_bloc.dart';
 import 'package:hiveee/bloc/user/user_bloc.dart';
+import 'package:hiveee/repositories/order_repository.dart';
 import 'package:hiveee/repositories/product_repository.dart';
 import 'package:hiveee/repositories/user_repository.dart';
 import 'package:hiveee/screens/login_screen.dart';
@@ -11,9 +13,11 @@ import 'package:hiveee/screens/seller/update_product_data.dart';
 import 'package:hiveee/screens/seller/list_product.dart';
 import 'package:hiveee/screens/seller/seller_screen.dart';
 import 'package:hiveee/screens/signup_screen.dart';
-import 'package:hiveee/screens/update_user_data.dart';
-import 'package:hiveee/screens/user_list_screen.dart';
-import 'package:hiveee/screens/user_screen.dart';
+import 'package:hiveee/screens/admin/update_user_data.dart';
+import 'package:hiveee/screens/admin/user_list_screen.dart';
+import 'package:hiveee/screens/user/order_list_page.dart';
+import 'package:hiveee/screens/user/order_page.dart';
+import 'package:hiveee/screens/user/user_screen.dart';
 
 class RouteGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
@@ -71,6 +75,27 @@ class RouteGenerator {
                 providers: [
                   BlocProvider(
                     create:
+                        (context) => OrderBloc(
+                          orderRepository: context.read<OrderRepository>(),
+                        ),
+                  ),
+                  BlocProvider(
+                    create:
+                        (context) => ProductBloc(
+                          productRepository: context.read<ProductRepository>(),
+                        ),
+                  ),
+                ],
+                child: const UserScreen(),
+              ),
+        );
+      case '/orderPage':
+        return MaterialPageRoute(
+          builder:
+              (_) => MultiBlocProvider(
+                providers: [
+                  BlocProvider(
+                    create:
                         (context) => UserBloc(
                           userRepository: context.read<UserRepository>(),
                         ),
@@ -81,9 +106,27 @@ class RouteGenerator {
                           userRepository: context.read<UserRepository>(),
                         ),
                   ),
+                  BlocProvider(
+                    create:
+                        (context) => OrderBloc(
+                          orderRepository: context.read<OrderRepository>(),
+                        ),
+                  ),
                 ],
-                child: const UserScreen(),
+                child: const OrderPage(),
               ),
+        );
+      case '/userOrderList':
+        return MaterialPageRoute(
+          builder:
+              (_) => BlocProvider(
+                create:
+                    (context) => OrderBloc(
+                      orderRepository: context.read<OrderRepository>(),
+                    ),
+              child: const OrderListPage(),
+              ),
+              
         );
       case '/sellerPage':
         return MaterialPageRoute(

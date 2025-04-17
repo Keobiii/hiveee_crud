@@ -9,23 +9,21 @@ abstract class OrderEvent extends Equatable {
 }
 
 class AddOrder extends OrderEvent {
-  final Product product;
-  final User user;
+  final Order order;
 
-  AddOrder(this.product, this.user);
+  AddOrder(this.order);
 
   @override
-  List<Object?> get props => [product, user];
+  List<Object?> get props => [order];
 }
 
 class UpdateOrder extends OrderEvent {
-  final Product updatedOrder;
-  final User updatedUser;
+  final Order updatedOrder;
 
-  UpdateOrder(this.updatedOrder, this.updatedUser);
+  UpdateOrder(this.updatedOrder);
 
   @override
-  List<Object?> get props => [updatedOrder, updatedUser];
+  List<Object?> get props => [updatedOrder];
 }
 
 class DeleteOrder extends OrderEvent {

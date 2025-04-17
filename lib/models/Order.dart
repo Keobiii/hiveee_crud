@@ -1,7 +1,5 @@
 import 'package:hive_flutter/adapters.dart';
 import 'package:hiveee/models/order_status.dart';
-import 'package:hiveee/models/product.dart';
-import 'package:hiveee/models/user.dart';
 
 part 'order.g.dart';
 
