@@ -48,7 +48,17 @@ class _LoginScreenState extends State<LoginScreen> {
               ).pushNamedAndRemoveUntil('/unknown', (route) => false);
               break;
           }
-        }
+        } 
+        
+        if (state is AuthFailure) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text(
+                'Invalid Credentials'
+              ),
+            )
+          );
+        } 
       },
       child: Scaffold(
         body: SingleChildScrollView(

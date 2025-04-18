@@ -17,9 +17,10 @@ enum OrderStatus {
   const OrderStatus(this.status, this.statusId);
 
   static OrderStatus fromStatusId(int statusId) {
-    return OrderStatus.values.firstWhere(
-      (status) => status.statusId == status,
-      orElse: () => OrderStatus.UK,
-    );
-  }
+  return OrderStatus.values.firstWhere(
+    (status) => status.statusId == statusId,
+    orElse: () => OrderStatus.UK,
+  );
+}
+
 }

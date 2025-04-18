@@ -34,6 +34,13 @@ class _SellerScreenState extends State<SellerScreen> {
               SizedBox(height: 20),
               GradientButton(
                 onPressed: () {
+                  Navigator.pushNamed(context, '/listOrder');
+                },
+                text: 'Order List',
+              ),
+              SizedBox(height: 20),
+              GradientButton(
+                onPressed: () {
                   Navigator.of(context).pushNamedAndRemoveUntil('/', (route) => false);
                 },
                 text: 'Logout',

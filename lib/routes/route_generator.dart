@@ -9,6 +9,8 @@ import 'package:hiveee/repositories/product_repository.dart';
 import 'package:hiveee/repositories/user_repository.dart';
 import 'package:hiveee/screens/login_screen.dart';
 import 'package:hiveee/screens/seller/add_product.dart';
+import 'package:hiveee/screens/seller/list_orders.dart';
+import 'package:hiveee/screens/seller/update_order.dart';
 import 'package:hiveee/screens/seller/update_product_data.dart';
 import 'package:hiveee/screens/seller/list_product.dart';
 import 'package:hiveee/screens/seller/seller_screen.dart';
@@ -124,9 +126,8 @@ class RouteGenerator {
                     (context) => OrderBloc(
                       orderRepository: context.read<OrderRepository>(),
                     ),
-              child: const OrderListPage(),
+                child: const OrderListPage(),
               ),
-              
         );
       case '/sellerPage':
         return MaterialPageRoute(
@@ -184,6 +185,29 @@ class RouteGenerator {
                       productRepository: context.read<ProductRepository>(),
                     ),
                 child: UpdateProductData(productId: productId),
+              ),
+        );
+      case '/listOrder':
+        return MaterialPageRoute(
+          builder:
+              (_) => BlocProvider(
+                create:
+                    (context) => OrderBloc(
+                      orderRepository: context.read<OrderRepository>(),
+                    ),
+                child: const ListOrders(),
+              ),
+        );
+      case '/updateOrder':
+        final orderId = settings.arguments as int;
+        return MaterialPageRoute(
+          builder:
+              (_) => BlocProvider(
+                create:
+                    (context) => OrderBloc(
+                      orderRepository: context.read<OrderRepository>(),
+                    ),
+                child: UpdateOrder(orderId: orderId),
               ),
         );
       default:

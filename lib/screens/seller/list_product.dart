@@ -20,7 +20,7 @@ class _ListProductState extends State<ListProduct> {
     final productBox = Hive.box<Product>('products');
 
     return Scaffold(
-      appBar: AppBar(title: const Text("Registered Users")),
+      appBar: AppBar(title: const Text("Product List")),
       // "ValueListenableBuilder" listens for the changes in the Hive box
       // its reactive package of hive
       body: ValueListenableBuilder(

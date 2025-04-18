@@ -40,7 +40,7 @@ class UserListScreen extends StatelessWidget {
                   child: Icon(Icons.delete, color: Colors.white),
                 ),
                 onDismissed: (direction) {
-                  print("${user.userId} Selected");
+                  // print("${user.userId} Selected");
                   context.read<UserBloc>().add(DeleteUser(user.userId));
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
