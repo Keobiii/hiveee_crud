@@ -3,7 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hiveee/bloc/auth/auth_bloc.dart';
 import 'package:hiveee/bloc/order/order_bloc.dart';
 import 'package:hiveee/bloc/product/product_bloc.dart';
+import 'package:hiveee/bloc/user/user.event.dart';
 import 'package:hiveee/bloc/user/user_bloc.dart';
+import 'package:hiveee/bloc/user/user_state.dart';
 import 'package:hiveee/repositories/order_repository.dart';
 import 'package:hiveee/repositories/product_repository.dart';
 import 'package:hiveee/repositories/user_repository.dart';
@@ -51,12 +53,13 @@ class RouteGenerator {
           builder:
               (_) => BlocProvider(
                 create:
-                    (context) => UserBloc(
-                      userRepository: context.read<UserRepository>(),
-                    ),
+                    (context) =>
+                        UserBloc(userRepository: context.read<UserRepository>())
+                          ..add(LoadUsers()),
                 child: const UserListScreen(),
               ),
         );
+
       case '/updateUser':
         // Expecting the Page that passing userId
         final userId = settings.arguments as int;

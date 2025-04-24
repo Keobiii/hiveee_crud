@@ -3,6 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive/hive.dart';
 import 'package:hiveee/bloc/auth/auth_bloc.dart';
 import 'package:hiveee/bloc/auth/auth_event.dart';
+import 'package:hiveee/bloc/user/user.event.dart';
+import 'package:hiveee/bloc/user/user_bloc.dart';
 import 'package:hiveee/models/user.dart';
 import 'package:hiveee/screens/login_screen.dart';
 import 'package:hiveee/widget/gradient_button.dart';
@@ -137,6 +139,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       );
 
                       context.read<AuthBloc>().add(RegisterUser(user));
+                      context.read<UserBloc>().add(LoadUsers());
                       Navigator.of(context).pop();
                     }
                   },

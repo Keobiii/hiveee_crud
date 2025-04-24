@@ -6,6 +6,8 @@ abstract class UserEvent extends Equatable {
   List<Object?> get props => [];
 }
 
+class LoadUsers extends UserEvent {}
+
 class UpdateUser extends UserEvent {
   final User updatedUser;
 
